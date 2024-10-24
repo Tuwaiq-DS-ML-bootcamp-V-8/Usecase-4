@@ -1,4 +1,3 @@
-
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -6,7 +5,7 @@ import plotly.express as px
 # Load your Toyota dataset
 data = pd.read_csv('df_car_Toyota.csv')  # Adjust with your dataset path
 
-#css
+# CSS
 css = """
 <style>
 body {
@@ -60,7 +59,6 @@ st.markdown("<div class='markdown-text'>I got you</div>", unsafe_allow_html=True
 st.markdown("<div class='markdown-text'>I understand the struggle of looking for a new car, so I did the heavy lifting for you.</div>", unsafe_allow_html=True)
 st.markdown("<div class='markdown-text'>First of all, I wanted to show you the main top 10 cars from Toyota in the used car market. It could interest you in specific car</div>", unsafe_allow_html=True)
 
-
 st.markdown("### Here are the main top 10 cars from Toyota")
 # Count the occurrences of each car type
 top_10_types = data['Type'].value_counts().head(10)
@@ -71,21 +69,9 @@ chart_data = pd.DataFrame({
 fig1 = px.bar(chart_data, x='Type', y='Total', title='Top 10 Toyota Car Types',
               range_y=[0, max(chart_data['Total']) + 5])
 st.plotly_chart(fig1)
-
 
 st.markdown("<div class='markdown-text'>However, if you have something in mind, maybe a specific car from Toyota?</div>", unsafe_allow_html=True)
 st.markdown("<div class='markdown-text'>Take a look</div>", unsafe_allow_html=True)
-
-st.markdown("### Here are the main top 10 cars from Toyota")
-# Count the occurrences of each car type
-top_10_types = data['Type'].value_counts().head(10)
-chart_data = pd.DataFrame({
-    'Type': top_10_types.index,
-    'Total': top_10_types.values
-})
-fig1 = px.bar(chart_data, x='Type', y='Total', title='Top 10 Toyota Car Types',
-              range_y=[0, max(chart_data['Total']) + 5])
-st.plotly_chart(fig1)
 
 # User Input for Car Type
 car_types = data['Type'].unique()
@@ -93,8 +79,6 @@ selected_car = st.selectbox('What Type of car are you interested in?', car_types
 
 # Filter based on the selected car type
 filtered_data = data[data['Type'] == selected_car]
-
-
 
 # Display price ranges for the selected car type
 st.markdown("### Of course, you want it to be in your budget, so obviously I got your back here too. "
@@ -138,4 +122,3 @@ fig3.update_traces(pull=[0.05] * len(region_data),  # Small separation for each 
                    textinfo='percent+label',  # Show percentage and label
                    marker=dict(line=dict(color='#FFFFFF', width=2)))  # Add white border for contrast
 st.plotly_chart(fig3)
-
