@@ -1,3 +1,3 @@
 import streamlit as st
 
-st.write('Hello world!')
+st.image('./Winter.jpg', caption='الشتا جاي!')
