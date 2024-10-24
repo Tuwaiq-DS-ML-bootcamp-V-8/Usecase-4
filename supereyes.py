@@ -1,9 +1,9 @@
 import streamlit as st
 import pandas as pd
-from ipyvizzu import Chart, Data, Config
+import plotly.express as px
 
 # Load your Toyota dataset
-data = pd.read_csv('toyota_cars.csv')  # Adjust with your dataset path
+data = pd.read_csv('df_car_Toyota.csv')  # Adjust with your dataset path
 
 # Title and Introduction
 st.title("Toyota Car Finder Dashboard")
@@ -27,12 +27,9 @@ chart_data = pd.DataFrame({
     'Count': top_10_types.values
 })
 
-# Visualize with Ipyvizzu
-chart = Chart()
-data_chart = Data()
-data_chart.add_df(chart_data)
-chart.animate(Config.bar({"x": "Type", "y": "Count"}))
-st.write(chart.show())
+# Visualize with Plotly
+fig1 = px.bar(chart_data, x='Type', y='Count', title='Top 10 Toyota Car Types')
+st.plotly_chart(fig1)
 
 # Display price ranges for the selected car type
 st.markdown("### 2. Price Range for Selected Toyota Car Type")
@@ -46,23 +43,20 @@ price_data = pd.DataFrame({
     'Count': price_range_counts.values
 })
 
-price_chart = Chart()
-price_chart_data = Data()
-price_chart_data.add_df(price_data)
-price_chart.animate(Config.bar({"x": "Price Range", "y": "Count"}))
-st.write(price_chart.show())
+# Visualize price ranges with Plotly
+fig2 = px.bar(price_data, x='Price Range', y='Count', title='Price Range for Selected Toyota Car Type')
+st.plotly_chart(fig2)
 
 # Display regions where the selected car type is available
 st.markdown("### 3. Regions Where the Car is Available")
 
+# Count the occurrences of each region
 region_counts = filtered_data['Region'].value_counts()
-region_chart_data = pd.DataFrame({
+region_data = pd.DataFrame({
     'Region': region_counts.index,
     'Count': region_counts.values
 })
 
-region_chart = Chart()
-region_data = Data()
-region_data.add_df(region_chart_data)
-region_chart.animate(Config.pie({"values": "Count", "labels": "Region"}))
-st.write(region_chart.show())
+# Visualize regions with Plotly
+fig3 = px.pie(region_data, names='Region', values='Count', title='Regions Where the Car is Available')
+st.plotly_chart(fig3)
