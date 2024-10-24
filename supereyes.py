@@ -59,6 +59,17 @@ st.markdown("<div class='markdown-text'>I got you</div>", unsafe_allow_html=True
 st.markdown("<div class='markdown-text'>I understand the struggle of looking for a new car, so I did the heavy lifting for you.</div>", unsafe_allow_html=True)
 st.markdown("<div class='markdown-text'>For starters, I'm sure you have something in mind, maybe a specific car from Toyota?</div>", unsafe_allow_html=True)
 
+st.markdown("### Here are the main top 10 cars from Toyota")
+# Count the occurrences of each car type
+top_10_types = data['Type'].value_counts().head(10)
+chart_data = pd.DataFrame({
+    'Type': top_10_types.index,
+    'Total': top_10_types.values
+})
+fig1 = px.bar(chart_data, x='Type', y='Total', title='Top 10 Toyota Car Types',
+              range_y=[0, max(chart_data['Total']) + 5])
+st.plotly_chart(fig1)
+
 # User Input for Car Type
 car_types = data['Type'].unique()
 selected_car = st.selectbox('What Type of car are you interested in?', car_types)
@@ -67,19 +78,19 @@ selected_car = st.selectbox('What Type of car are you interested in?', car_types
 filtered_data = data[data['Type'] == selected_car]
 
 # Display the top 10 Toyota types
-st.markdown("### Here are the main top 10 cars from Toyota")
+#st.markdown("### Here are the main top 10 cars from Toyota")
 
 # Count the occurrences of each car type
-top_10_types = data['Type'].value_counts().head(10)
-chart_data = pd.DataFrame({
-    'Type': top_10_types.index,
-    'Count': top_10_types.values
-})
+#top_10_types = data['Type'].value_counts().head(10)
+#chart_data = pd.DataFrame({
+#    'Type': top_10_types.index,
+#    'Count': top_10_types.values
+#})
 
 # Visualize with Plotly (static bar chart)
-fig1 = px.bar(chart_data, x='Type', y='Count', title='Top 10 Toyota Car Types',
-              range_y=[0, max(chart_data['Count']) + 5])
-st.plotly_chart(fig1)
+#fig1 = px.bar(chart_data, x='Type', y='Count', title='Top 10 Toyota Car Types',
+          #    range_y=[0, max(chart_data['Count']) + 5])
+#st.plotly_chart(fig1)
 
 # Display price ranges for the selected car type
 st.markdown("### Of course, you want it to be in your budget, so obviously I got your back here too. "
