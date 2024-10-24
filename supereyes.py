@@ -94,20 +94,7 @@ selected_car = st.selectbox('What Type of car are you interested in?', car_types
 # Filter based on the selected car type
 filtered_data = data[data['Type'] == selected_car]
 
-# Display the top 10 Toyota types
-#st.markdown("### Here are the main top 10 cars from Toyota")
 
-# Count the occurrences of each car type
-#top_10_types = data['Type'].value_counts().head(10)
-#chart_data = pd.DataFrame({
-#    'Type': top_10_types.index,
-#    'Count': top_10_types.values
-#})
-
-# Visualize with Plotly (static bar chart)
-#fig1 = px.bar(chart_data, x='Type', y='Count', title='Top 10 Toyota Car Types',
-          #    range_y=[0, max(chart_data['Count']) + 5])
-#st.plotly_chart(fig1)
 
 # Display price ranges for the selected car type
 st.markdown("### Of course, you want it to be in your budget, so obviously I got your back here too. "
